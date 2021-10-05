@@ -1,4 +1,18 @@
-.wrapper {
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 3px solid black;
+  background-color: white;
+}
+
+.custom-input-group {
+  margin: 10px
+}
+
+/*.wrapper {
     width: 60vw;
   }
   .data-show {
@@ -15,7 +29,7 @@
   }
   .search-box > button {
     margin-left: 5px;
-  }
+  }*/
   #cards {
     display: flex;
   }

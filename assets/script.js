@@ -1,3 +1,26 @@
+
+function getCurrent() {
+  var currentURL = 'https://covid19.mathdro.id/api/'
+  fetch(currentURL)
+     .then(function (response) {
+       return response.json();
+     })
+     .then(function (data) {
+       console.log(data.confirmed.value);
+       var casesConfirmed = data.confirmed.value;
+       $("#total-case-current").text(casesConfirmed) 
+        }
+     )
+    }
+getCurrent();
+function displayDate(){
+var now = moment().format("MM-DD-YYYY");
+console.log(now)
+$("#current-date").text(now);
+}
+displayDate();
+
+
 function getVaccApi(countryName, lastDays) {
     // fetch request gets a list of all the repos for the node.js organization
     let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ lastDays +'&fullData=true';
@@ -29,10 +52,10 @@ function getVaccApi(countryName, lastDays) {
 let defaultCountries = ["US", "France", "Australia"];
 let countries = [];
 
-document
+/*document
   .getElementById("search-btn")
   .addEventListener("click", handleClickSearch);
-  setUp();
+  setUp();*/
 
 
   function setUp(country = "US") {
