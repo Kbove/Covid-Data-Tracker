@@ -25,8 +25,8 @@ function getVaccApi(countryName, lastDays) {
 
   getVaccApi('USA', 7);
 
-  let dataOfAllCountries = null;
-let defaultCountries = ["US", "France", "Australia"];
+let dataOfAllCountries = null;
+let defaultCountries = ["US"];
 let countries = [];
 
 document
@@ -64,4 +64,31 @@ document
   });
   countriesDatas = countriesDatas.map((item) => {
     return item.All;
-  });}
+  });
+  countriesDatas.forEach((item) => {
+    innerHTML += `
+      <div class="card" style="width: 18rem">
+        <div class="card-body">
+          <h5 class="card-title">${item.country}</h5>
+          <p class="card-text">Population: ${item.population}</p>
+          <p class="card-text">Confirmed: ${item.confirmed}</p>
+          <p class="card-text">Deaths: ${item.deaths}</p>
+          <p class="card-text">Death Rate: ${(
+            item.deaths / item.confirmed
+          ).toFixed(2)}%</p>
+        </div>
+      </div>`;
+  });
+  document.getElementById("cards").innerHTML = innerHTML;
+
+} 
+
+function handleClickSearch() {
+const countryInput = document.getElementById("country-input");
+const country = countryInput.value;
+if (!country.trim()) countries = defaultCountries;
+else countries = [country.trim()];
+render();
+}
+  
+

@@ -2,7 +2,7 @@
     width: 60vw;
   }
   .data-show {
-    background-color: wheat;
+    background-color: #6798d0;
     width: 100%;
     height: 80vh;
     display: flex;
@@ -18,9 +18,11 @@
   }
   #cards {
     display: flex;
+    size: 50px;
   }
   #cards > div {
     margin: 15px 15px 0 0;
+    
   }
   .card {
     cursor: pointer;
