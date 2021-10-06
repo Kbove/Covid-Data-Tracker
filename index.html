@@ -25,22 +25,14 @@
         <div class="data-cards" id="cards"></div>
       </div>
     </div>
-    <section>
-        <!-- TODO: <canvas id="vaccChart" width="400" height="400"></canvas> -->
-        <!-- TODO: add time range picker -->
-        <div>
-            <table id="vaccTable" class="table">
-                <tr>
-                  <th>Date</th>
-                  <th>Daily</th>
-                  <th>Total</th>
-                </tr>
-                <!-- <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr> -->
-              </table>
+    <section id="vaccSection" class="hide">
+        <div id="chart">
+          <canvas id="vaccChartCanvas" width="600" height="400"></canvas>
+        </div>
+        <div id="range">
+          <span>Please select the number of days to look back from today: </span>
+          <input type="range" id="dateRange" min="7" max="280" value="30" />
+          <span id="rangeVal">30</span>
         </div>
     </section>
 

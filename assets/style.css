@@ -48,4 +48,12 @@
     cursor: pointer;
     box-shadow: 0 0 10px #333;
   }
-  
+
+
+#vaccSection {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
