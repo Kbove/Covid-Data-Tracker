@@ -1,4 +1,8 @@
 
+
+
+
+
 function getCurrent() {
   var currentURL = 'https://covid19.mathdro.id/api/'
   fetch(currentURL)
@@ -19,6 +23,7 @@ console.log(now)
 $("#current-date").text(now);
 }
 displayDate();
+
 
 
 function getVaccApi(countryName, lastDays) {
@@ -46,16 +51,18 @@ function getVaccApi(countryName, lastDays) {
       });
   }
 
+
+
   getVaccApi('USA', 7);
 
 let dataOfAllCountries = null;
 let defaultCountries = ["US"];
 let countries = [];
 
-/*document
+document
   .getElementById("search-btn")
   .addEventListener("click", handleClickSearch);
-  setUp();*/
+  setUp();
 
 
   function setUp(country = "US") {
@@ -68,7 +75,7 @@ let countries = [];
       });
   }
 
-  function render() {
+  function render(){
   let innerHTML = "";
   // render countries
   const dataOfAllCountriesKeys = Object.keys(dataOfAllCountries);
