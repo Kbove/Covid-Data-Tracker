@@ -1,8 +1,4 @@
 
-
-
-
-
 function getCurrent() {
   var currentURL = 'https://covid19.mathdro.id/api/'
   fetch(currentURL)
@@ -80,11 +76,6 @@ let chartLabels = []
 let userInputDays = 7
 let vaccChart
 
-
-function getVaccApi(countryName, lastDays) {
-    // fetch request gets a list of all the repos for the node.js organization
-    let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ lastDays +'&fullData=true';
-
 //function to retrieve and display vaccine data
 //will change display from none to flex once called the first time.
 function getVaccApi(countryName, lastDays = 30) {
@@ -92,7 +83,6 @@ function getVaccApi(countryName, lastDays = 30) {
     $('#vaccSection').css('display','flex');  
   }
   let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ lastDays +'&fullData=true';
-
   
     fetch(vaccAPIUrl)
       .then(function (response) {
@@ -154,17 +144,12 @@ $( "#dateRange" ).on( "input", function(e) {
 
 
 
-
-
-  getVaccApi('USA', 7);
-
-
 // ====================================================
 let dataOfAllCountries = null;
 let defaultCountries = ["US"];
 let countries = [];
 
-  function render(){
+  function render() {
   let innerHTML = "";
   // render countries
   const dataOfAllCountriesKeys = Object.keys(dataOfAllCountries);
