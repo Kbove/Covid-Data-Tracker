@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>COVID-19 Data</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
   <body>
@@ -15,25 +14,24 @@
       <h3 class="total-case-container">Total Current Cases: <span id="total-case-current"></span></h3>
       <h4 class="date-header">Current Date: <span id="current-date"></span></h4>
     </div>
-    <div class="custom-input-group mb-3">
+    <!-- <div class="custom-input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text" id="basic-addon1">Country</span>
       </div>
       <input type="text" class="form-control" placeholder="USA" aria-label="country" aria-describedby="basic-addon1">
-    </div>
+    </div> -->
     
-    <!--<div class="wrapper">
+    <div class="wrapper">
       <div class="data-show">
         <div class="search-box input-group mb-3">
           <span class="input-group-text" id="basic-addon1">Country</span>
           <input
             type="text"
-            class="form-control"
-            placeholder="USA"
+            placeholder="US"
             id="country-input"
           />
-          <button class="btn btn-primary" id="search-btn">Search</button>
-        </div>-->
+          <button id="search-btn">Search</button>
+        </div>
         <div class="data-cards" id="cards"></div>
       </div>
     </div>
@@ -47,10 +45,8 @@
           <span id="rangeVal">30</span>
         </div>
     </section>
-
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
