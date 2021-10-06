@@ -60,7 +60,7 @@ let chartOptions = {
           title: {
             text:  'Total Vaccine Count',
             display: true,
-            // font:
+            font: 'monospace',
             // color:
             // padding:
           },
@@ -164,22 +164,6 @@ let dataOfAllCountries = null;
 let defaultCountries = ["US"];
 let countries = [];
 
-document
-  .getElementById("search-btn")
-  .addEventListener("click", handleClickSearch);
-  setUp();
-
-
-  function setUp(country = "US") {
-    countries = defaultCountries;
-    fetch(`https://covid-api.mmediagroup.fr/v1/cases`)
-      .then((res) => res.json())
-      .then((data) => {
-        dataOfAllCountries = data;
-        render();
-      });
-  }
-
   function render(){
   let innerHTML = "";
   // render countries
@@ -200,6 +184,7 @@ document
   countriesDatas = countriesDatas.map((item) => {
     return item.All;
   });
+
   countriesDatas.forEach((item) => {
     innerHTML += `
       <div class="card" style="width: 18rem">
@@ -208,7 +193,7 @@ document
           <p class="card-text">Population: ${item.population}</p>
           <p class="card-text">Confirmed: ${item.confirmed}</p>
           <p class="card-text">Deaths: ${item.deaths}</p>
-          <p class="card-text">Death Rate: ${(
+          <p class="card-text">Mortality Rate: ${(
             item.deaths / item.confirmed
           ).toFixed(2)}%</p>
         </div>
@@ -217,6 +202,15 @@ document
   document.getElementById("cards").innerHTML = innerHTML;
 
 } 
+function setUp(country = "US") {
+  countries = defaultCountries;
+  fetch(`https://covid-api.mmediagroup.fr/v1/cases`)
+    .then((res) => res.json())
+    .then((data) => {
+      dataOfAllCountries = data;
+      render();
+    });
+}
 
 function handleClickSearch() {
 const countryInput = document.getElementById("country-input");
@@ -225,5 +219,11 @@ if (!country.trim()) countries = defaultCountries;
 else countries = [country.trim()];
 render();
 }
-  
+
+setUp();
+document
+.getElementById("search-btn")
+.addEventListener("click", handleClickSearch);
+
+
 
