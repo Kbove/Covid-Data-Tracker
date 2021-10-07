@@ -190,7 +190,7 @@ font-family: Arial, Helvetica, sans-serif;
   color: var(--white)
 }
 
-/* #vaccSection {
+ /* #vaccSection {
   display: inline-flex;
   flex-wrap: wrap;
   left: 30px;
@@ -198,11 +198,10 @@ font-family: Arial, Helvetica, sans-serif;
   background-color: var(--blue);
   color:var(--white);
   font-weight: 600;
-}
+} */
 
 .card-body {
   margin: 20px auto;
-  display: grid;
   grid-template-columns: 200px 200px;
   grid-row: auto auto;
   grid-column-gap: 20px;
@@ -217,7 +216,7 @@ font-family: Arial, Helvetica, sans-serif;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-} */
+} 
 
 canvas{
   width:1000px !important;
