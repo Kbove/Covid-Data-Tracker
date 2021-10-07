@@ -32,11 +32,11 @@ const questionsArray = [
         question: "Which of the following methods will NOT help to protect yourself & others from getting Covid?",
         answers: [
             {choice: "Wear a mask and stay 6-feet away from others"},
-            {choice: "Covering coughs & sneezes and wash your hands often."},
+            {choice: "Covering coughs & sneezes and wash your hands often"},
             {choice: "Going out and about on your daily routine when infected"},
             {choice: "Avoiding crowds and poorly ventilated spaces"}
         ],
-        correct: "Wear a mask and stay 6-feet away from others"
+        correct: "Going out and about on your daily routine when infected"
     },
     {
         question: "Who should get Covid tested?",
@@ -59,14 +59,14 @@ const questionsArray = [
         correct: "Take a bus to the hospital for medical care without any appointment"
     },
     {
-        question: "Who is at increased risk for severe illness?",
+        question: "Who is NOT at increased risk for severe illness?",
         answers: [
             {choice: "Teenagers"},
             {choice: "Older adults"},
             {choice: "Pregnant and recently pregnant people"},
             {choice: "People with medical conditions"}
         ],
-        correct: "Older adults"
+        correct: "Teenagers"
     },
     {
         question: "In order to protect yourself and others, you should:",
@@ -81,12 +81,12 @@ const questionsArray = [
     {
         question: "If you are not fully vaccinated, what should you do after you travel?",
         answers: [
-            {choice: "Get tested with a viral test 3-5 days after travel AND stay at home for a full 7 days after travel."},
-            {choice: "If you don’t get tested, stay home and self-quarantine for 10 days after travel."},
-            {choice: "Avoid being around people who are at increased risk for severe illness for 14 days, whether you get tested or not."},
-            {choice: "Avoid sharing personal household items and clean all 'high-touch' surfaces everyday."},
+            {choice: "Get tested with a viral test 3-5 days after travel AND stay at home for a full 7 days after travel"},
+            {choice: "If you don’t get tested, stay home and self-quarantine for 10 days after travel"},
+            {choice: "Avoid being around people who are at increased risk for severe illness for 14 days, whether you get tested or not"},
+            {choice: "All the answers above"},
         ],
-        correct: "All of the above"
+        correct: "All the answers above"
     },
 
 ]
@@ -165,9 +165,9 @@ rsBtn.addEventListener('click', clearGame)
 function clearGame() {
     localStorage.clear()
     score = 0;
-    startBtn.style.display = "show"
+    startBtn.style.display = "inherit"
     answers.innerHTML = ""
     gameScore.innerhtml = ""
     timerElement.textContent = ""
-        clearInterval(timer);
+    clearInterval(timer);
 }

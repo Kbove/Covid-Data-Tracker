@@ -5,18 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
-    <link rel="stylesheet" href="./Assets/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><h1>Covid Safety</h1>
-        <button class="start-button">Start</button>
-        <button class="reset-button">Quit/Reset</button>
+    <header><h1><a href="../index.html">Covid Safety</a></h1>
+        <div class="buttons">
+            <button class="start-button">Start</button>
+            <button class="reset-button">Quit/Reset</button>
+        </div>
     </header>
     <main>
-        <section>
+        <section id="rule-container">
             <div class="rules"><h2 id="rule-header">Game Rules</h2>
-                <ul>
+                <ul id="rulelist">
                     <li>Timer starts when "Start" is pressed</li>
+                    <li>penalty</li>
                 </ul>             
             </div>
         </section>
@@ -32,7 +35,7 @@
                 </div>
             </div>
         </section>
-
+    <div  class="bottom">
         <section>
             </div>
                 <div class="card-timer">
@@ -42,12 +45,12 @@
                     </div>
                 </div>
         </section>
-        <section>
+        <section class="score">
             <h2>Current Score</h2>
             <div class="current-score"></div>
         </section>
-       
+    </div>       
     </main>
-    <script src="Assets/quiz.js"></script>
+    <script src="./quiz.js"></script>
 </body>
 </html>
