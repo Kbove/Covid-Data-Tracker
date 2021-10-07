@@ -21,6 +21,7 @@ function displayDate() {
 let chartCanvas = document.getElementById('vaccChartCanvas').getContext('2d');
 let chartOptions = {
   responsive: true,
+  maintainAspectRatio: true,
   interaction: {
     mode: 'index',
     intersect: false,
@@ -30,7 +31,10 @@ let chartOptions = {
     title: {
       display: true,
       text: 'Covid Vaccine Data History',
-      fontsize: 25
+      font: {
+        size: 35,
+        family: 'Crimson Pro',
+      }
     },
   },
   scales: {
@@ -41,6 +45,10 @@ let chartOptions = {
       title: {
         text: 'Daily Vaccine Count',
         display: true,
+        font: {
+          size: 20,
+          family: 'Crimson Pro',
+        }
         // font:
         // color:
         // padding:
@@ -53,7 +61,10 @@ let chartOptions = {
       title: {
         text: 'Total Vaccine Count',
         display: true,
-        font: 'monospace',
+        font: {
+          size: 20,
+          family: 'Crimson Pro',
+        },
         // color:
         // padding:
       },
