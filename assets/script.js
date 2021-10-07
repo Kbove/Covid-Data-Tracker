@@ -12,6 +12,7 @@ function getCurrent() {
         }
      )
     }
+
 getCurrent();
 function displayDate(){
 var now = moment().format("MM-DD-YYYY");
@@ -20,7 +21,6 @@ $("#current-date").text(now);
 }
 displayDate();
 
-// =======================================
 let chartCanvas = document.getElementById('vaccChartCanvas').getContext('2d');
 let chartOptions = {
   responsive: true,
@@ -73,16 +73,24 @@ let chartOptions = {
 let data1 = []
 let data2 = []
 let chartLabels = []
-let userInputDays = 7
+let userInputDays = 30
 let vaccChart
 
 //function to retrieve and display vaccine data
 //will change display from none to flex once called the first time.
-function getVaccApi(countryName, lastDays = 30) {
+function getVaccApi() {
+  if (vaccChart) {
+    vaccChart.destroy()
+  }
+  let countryName = countries[0]
+  if(countryName.toLowerCase() === 'us') {
+    countryName = 'usa';
+  }
+
   if($('#vaccSection').css('display') !== "flex") {
     $('#vaccSection').css('display','flex');  
   }
-  let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ lastDays +'&fullData=true';
+  let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ userInputDays +'&fullData=true';
   
     fetch(vaccAPIUrl)
       .then(function (response) {
@@ -127,14 +135,10 @@ function getVaccApi(countryName, lastDays = 30) {
 
 // mock api call to show data before search button
 // should be replaced by search event triger
-getVaccApi('USA', 30);
+//getVaccApi(30);
 $('#dateRange').change((e)=>{
-  if (vaccChart) {
-    vaccChart.destroy()
-  }
-  console.log(e.target.value)
-  getVaccApi('USA', e.target.value);
-  
+  userInputDays = e.target.value
+  getVaccApi();
 })
 
 $( "#dateRange" ).on( "input", function(e) {
@@ -142,19 +146,21 @@ $( "#dateRange" ).on( "input", function(e) {
 });
 
 
-
-
-// ====================================================
 let dataOfAllCountries = null;
 let defaultCountries = ["US"];
 let countries = [];
 
-  function render() {
+function render() {
   let innerHTML = "";
   // render countries
   const dataOfAllCountriesKeys = Object.keys(dataOfAllCountries);
 
-  let countriesDatas = countries.map((country) => {
+  let countriesDatas = countries.map((countryText) => {
+    if(countryText === 'usa') {
+      country = 'us'
+    } else {
+      country = countryText
+    }
     const countryKey = dataOfAllCountriesKeys.find((key) => {
       return key.toLowerCase() === country.toLowerCase();
     });
@@ -172,13 +178,15 @@ let countries = [];
 
   countriesDatas.forEach((item) => {
     innerHTML += `
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">${item.country}</h5>
-          <p class="card-text">Population: ${item.population}</p>
-          <p class="card-text">Confirmed: ${item.confirmed}</p>
-          <p class="card-text">Deaths: ${item.deaths}</p>
-          <p class="card-text">Mortality Rate: ${(
+      <div class="card" style="width: 40rem">
+      <div class="title-container"
+        <h5 class="card-title">${item.country}</h5>
+        </div>
+      <div class="card-body">
+          <p class="card-text" id="population">Population: ${item.population}</p>
+          <p class="card-text" id="confirmed">Confirmed: ${item.confirmed}</p>
+          <p class="card-text" id="deaths">Deaths: ${item.deaths}</p>
+          <p class="card-text" id="mort">Mortality Rate: ${(
             item.deaths / item.confirmed
           ).toFixed(2)}%</p>
         </div>
@@ -194,21 +202,23 @@ function setUp(country = "US") {
     .then((data) => {
       dataOfAllCountries = data;
       render();
-    });
+  });
+  getVaccApi()
 }
 
-function handleClickSearch() {
-const countryInput = document.getElementById("country-input");
-const country = countryInput.value;
-if (!country.trim()) countries = defaultCountries;
-else countries = [country.trim()];
-render();
+function handleClickSearch(e) {
+  e.preventDefault();
+  const countryInput = document.getElementById("country-input");
+  const country = countryInput.value;
+  if (!country.trim()) countries = defaultCountries;
+  else countries = [country.trim()];
+  render();
+  getVaccApi();
 }
 
 setUp();
-document
-.getElementById("search-btn")
-.addEventListener("click", handleClickSearch);
+
+$('#searchForm').submit(handleClickSearch)
 
 
 
