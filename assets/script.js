@@ -178,13 +178,15 @@ function render() {
 
   countriesDatas.forEach((item) => {
     innerHTML += `
-      <div class="card" style="width: 18rem">
-        <div class="card-body">
-          <h5 class="card-title">${item.country}</h5>
-          <p class="card-text">Population: ${item.population}</p>
-          <p class="card-text">Confirmed: ${item.confirmed}</p>
-          <p class="card-text">Deaths: ${item.deaths}</p>
-          <p class="card-text">Mortality Rate: ${(
+      <div class="card" style="width: 40rem">
+      <div class="title-container"
+        <h5 class="card-title">${item.country}</h5>
+        </div>
+      <div class="card-body">
+          <p class="card-text" id="population">Population: ${item.population}</p>
+          <p class="card-text" id="confirmed">Confirmed: ${item.confirmed}</p>
+          <p class="card-text" id="deaths">Deaths: ${item.deaths}</p>
+          <p class="card-text" id="mort">Mortality Rate: ${(
             item.deaths / item.confirmed
           ).toFixed(2)}%</p>
         </div>

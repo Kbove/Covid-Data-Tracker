@@ -1,97 +1,176 @@
 :root {
-    --purple: #90647b;
-    --red: #ea583f;
-    --yellow: #ffdb21;
-    --blue: #4787ad;
-    --white: #fef2da;
-    --black: #4f5356; 
-  }
+  --purple: #90647b;
+  --red: #ea583f;
+  --yellow: #ffdb21;
+  --blue: #4787ad;
+  --white: #fef2da;
+  --black: #4f5356; 
+}
 
 body {
-  margin: 0;
-  padding: 0;
+margin: 0;
+padding: 0;
 }
 
 .header-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 3px solid black;
-  color: var(--white);
-  background-color: var(--purple);
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+border-bottom: 3px solid var(--black);
+color: var(--white);
+background-color: var(--purple);
+font-family: Arial, Helvetica, sans-serif;
 }
 
-.custom-input-group {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  margin:0 auto;
-  width: 50%;
-}
+
+/*.input-group {
+padding: 10px;
+display: flex;
+flex-direction: row;
+align-items: center;
+width: 50%;
+}*/
 
 .wrapper {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+display: flex;
+justify-content: space-around;
+align-items: center;
 }
 /* 
 .wrapper {
-    width: 60vw;
-  } */
-  /* .data-show {
-    background-color: #6798d0;
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
-  
-  #search.container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .search-box {
-    margin-top: 10vh;
-    width: 40%;
-  }
-  .search-box > button {
-    margin-left: 5px;
-  }
-  #cards {
-    display: flex;
-  }
-  #cards > div {
-    margin: 15px 15px 0 0;
-    display:inline-flex;
-    flex-wrap: wrap;
-    left: 30px;
-    height: 250px;
-    background-color: var(--blue);
-    color:var(--white);
-    font-weight: 600;
-  }
-  .card {
-    cursor: pointer;
-    box-shadow: 0 0 10px #4f5356;
-  }
-
-
-#vaccSection {
-  display: inline-flex;
-  flex-wrap: wrap;
+  width: 60vw;
+} */
+/* .data-show {
+  background-color: #6798d0;
+  width: 100%;
+  height: 80vh;
+  display: flex;
   flex-direction: column;
+  align-items: center;
+} */
+
+/*#search-container {
+  display: flex;
+  justify-content: right;
+  border: 3px solid black;
+  margin-right: -200px;
+}*/
+
+#search-container.search-box.input-group {
+  margin: 10vh;
+  /*width: 40%;*/
+  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#search-btn {
-    background-color: #ffdb21;
-    cursor: pointer;
+.input-group-text {
+font-family: Arial, Helvetica, sans-serif;
 }
-#country-input {
 
+#country-input {
+margin: 10px;
+}
+
+.search-box > button {
+  margin: 5px;
+}
+
+#cards {
+  display: flex;
+}
+
+#cards > div {
+  margin: 15px 15px 0 0;
+  display:inline-flex;
+  flex-wrap: wrap;
+  left: 30px;
+  height: 250px;
+  background-color: var(--blue);
+  color:var(--white);
+  font-weight: 600;
+}
+
+.card-body {
+  margin: 20px auto;
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-row: auto auto;
+  grid-column-gap: 20px;
+  grid-row-gap: 20px; 
+}
+
+.card {
+  cursor: pointer;
+  box-shadow: 0 0 10px #4f5356;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-container {
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+font-size:xx-large;
+padding: 10px;
+}
+.card-text {
+  border: 3px solid var(--white);
+  padding: 10px;
+  margin: 5px;
+  color: var(--black)
+}
+
+#population {
+  background-color: var(--yellow);
+}
+
+#confirmed {
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+#mort {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+#deaths {
+  background-color: var(--red);
+  color: var(--white)
+}
+
+#vaccSection {
+display: inline-flex;
+flex-wrap: wrap;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+#search-btn {
+  background-color: #ffdb21;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#quiz-container {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding: 20px;
+background-color: var(--red);
+border-top: 3px solid var(--black);
+border-bottom: 3px solid var(--black);
+}
+
+#quiz-btn {
+background-color: var(--yellow);
+border-radius: 5px;
+border-color: var(--white);
+padding: 5px;
 }
