@@ -1,147 +1,153 @@
-
 function getCurrent() {
   var currentURL = 'https://covid19.mathdro.id/api/'
   fetch(currentURL)
-     .then(function (response) {
-       return response.json();
-     })
-     .then(function (data) {
-       console.log(data.confirmed.value);
-       var casesConfirmed = data.confirmed.value;
-       $("#total-case-current").text(casesConfirmed) 
-        }
-     )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data.confirmed.value);
+      var casesConfirmed = data.confirmed.value;
+      $("#total-case-current").text(numberWithCommas(casesConfirmed))
     }
-
-getCurrent();
-function displayDate(){
-var now = moment().format("MM-DD-YYYY");
-console.log(now)
-$("#current-date").text(now);
+    )
 }
-displayDate();
+
+function displayDate() {
+  var now = moment().format("MM-DD-YYYY");
+  console.log(now)
+  $("#current-date").text(now);
+}
 
 let chartCanvas = document.getElementById('vaccChartCanvas').getContext('2d');
 let chartOptions = {
   responsive: true,
   interaction: {
-      mode: 'index',
-      intersect: false,
+    mode: 'index',
+    intersect: false,
   },
-    stacked: false,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Covid Vaccine Data History',
-        fontsize: 25
-      },
+  stacked: false,
+  plugins: {
+    title: {
+      display: true,
+      text: 'Covid Vaccine Data History',
+      fontsize: 25
     },
+  },
   scales: {
-      y: {
-          type: 'linear',
-          display: true,
-          position: 'left',
-          title: {
-            text:  'Daily Vaccine Count',
-            display: true,
-            // font:
-            // color:
-            // padding:
-          }
-        },
-      y1: {
-          type: 'linear',
-          display: true,
-          position: 'right',
-          title: {
-            text:  'Total Vaccine Count',
-            display: true,
-            font: 'monospace',
-            // color:
-            // padding:
-          },
-          grid: {
-              drawOnChartArea: false, // only want the grid lines for one axis to show up
-          },
+    y: {
+      type: 'linear',
+      display: true,
+      position: 'left',
+      title: {
+        text: 'Daily Vaccine Count',
+        display: true,
+        // font:
+        // color:
+        // padding:
       }
+    },
+    y1: {
+      type: 'linear',
+      display: true,
+      position: 'right',
+      title: {
+        text: 'Total Vaccine Count',
+        display: true,
+        font: 'monospace',
+        // color:
+        // padding:
+      },
+      grid: {
+        drawOnChartArea: false, // only want the grid lines for one axis to show up
+      },
+    }
   },
   tooltips: {
-    enabled:true
+    enabled: true
   }
 };
 
-let data1 = []
-let data2 = []
+let dailyData = []
+let totalData = []
 let chartLabels = []
 let userInputDays = 30
 let vaccChart
+let maxDays = 365
 
-//function to retrieve and display vaccine data
-//will change display from none to flex once called the first time.
-function getVaccApi() {
-  if (vaccChart) {
-    vaccChart.destroy()
-  }
+function fetchVaccData() {
   let countryName = countries[0]
-  if(countryName.toLowerCase() === 'us') {
+  //handle special case for compatibility
+  //vaccine api only work for usa, not us
+  if (countryName.toLowerCase() === 'us') {
     countryName = 'usa';
   }
-
-  if($('#vaccSection').css('display') !== "flex") {
-    $('#vaccSection').css('display','flex');  
-  }
-  let vaccAPIUrl = 'https://disease.sh/v3/covid-19/vaccine/coverage/countries/'+ countryName +'?lastdays='+ userInputDays +'&fullData=true';
-  
-    fetch(vaccAPIUrl)
-      .then(function (response) {
-        return response.json();
+  //update maxDays to current day minus beginning date with data
+  fetch("https://disease.sh/v3/covid-19/vaccine/coverage/countries/" + countryName + "?lastdays=" + maxDays + "&fullData=true")
+    .then(response => response.json())
+    .then(data => {
+      // console.log(data)
+      //clear data for new search
+      dailyData = []
+      totalData = []
+      chartLabels = []
+      //populate chart data
+      data.timeline.forEach((timeline) => {
+        chartLabels.push(timeline.date)
+        dailyData.push(timeline.daily)
+        totalData.push(timeline.total)
       })
-      .then(function (data) {
-        data1 = []
-        data2 = []
-        chartLabels = []
-        for (i = 0; i < data.timeline.length; i++) {
-            //console.log(data.timeline[i])
-            data1.push(data.timeline[i].daily);
-            data2.push(data.timeline[i].total);
-            chartLabels.push(data.timeline[i].date);
+
+      maxDays = Math.min(maxDays, chartLabels.length)
+      $('#dateRange').attr("max", maxDays)
+      renderChart()
+    });
+
+}
+
+//function to render vaccine data using charjs
+function renderChart() {
+  if (vaccChart) {
+    vaccChart.data.datasets[0].data = totalData.slice(maxDays - userInputDays, maxDays)
+    vaccChart.data.datasets[1].data = dailyData.slice(maxDays - userInputDays, maxDays)
+    vaccChart.data.labels = chartLabels.slice(maxDays - userInputDays, maxDays)
+    vaccChart.update()
+  } else {
+    let charData = {
+      datasets: [
+        {
+          type: 'line',
+          label: 'Total Vacc',
+          data: totalData.slice(maxDays - userInputDays, maxDays),
+          yAxisID: 'y1',
+          borderColor: 'rgb(249, 146, 39)',
+        }, {
+          type: 'bar',
+          label: 'Daily Vacc',
+          data: dailyData.slice(maxDays - userInputDays, maxDays),
+          yAxisID: 'y',
+          backgroundColor: 'rgb(43, 133, 190)',
+          boederWidth: 1,
+          hoverBorderColor: '#000',
         }
-        let charData = {
-          datasets:[
-          {
-            type: 'line',
-            label: 'Total Vacc',
-            data: data2,
-            yAxisID: 'y1',
-            borderColor: 'orange',
-          },{
-            type: 'bar',
-            label: 'Daily Vacc',
-            data: data1,
-            yAxisID: 'y',
-            backgroundColor:'lightblue',
-            boederWidth:1,
-            hoverBorderColor: '#000',
-          }
       ],
-          labels: chartLabels,
-      };
-        vaccChart = new Chart(chartCanvas, {
-          data: charData,
-          options: chartOptions
-      });
+      labels: chartLabels.slice(maxDays - userInputDays, maxDays),
+    };
+    vaccChart = new Chart(chartCanvas, {
+      data: charData,
+      options: chartOptions
     });
   }
+}
 
 // mock api call to show data before search button
 // should be replaced by search event triger
 //getVaccApi(30);
-$('#dateRange').change((e)=>{
+$('#dateRange').change((e) => {
   userInputDays = e.target.value
-  getVaccApi();
+  renderChart();
 })
 
-$( "#dateRange" ).on( "input", function(e) {
+$("#dateRange").on("input", function (e) {
   $('#rangeVal').text(e.target.value);
 });
 
@@ -156,7 +162,9 @@ function render() {
   const dataOfAllCountriesKeys = Object.keys(dataOfAllCountries);
 
   let countriesDatas = countries.map((countryText) => {
-    if(countryText === 'usa') {
+    //handle special case for compatibility
+    //current api only work for us, not usa
+    if (countryText === 'usa') {
       country = 'us'
     } else {
       country = countryText
@@ -178,32 +186,31 @@ function render() {
 
   countriesDatas.forEach((item) => {
     innerHTML += `
-      <div class="card" style="width: 40rem">
-      <div class="title-container"
-        <h5 class="card-title">${item.country}</h5>
+      <div class="card">
+        <div class="title-container"
+          <h5 class="card-title">${item.country}</h5>
         </div>
-      <div class="card-body">
-          <p class="card-text" id="population">Population: ${item.population}</p>
-          <p class="card-text" id="confirmed">Confirmed: ${item.confirmed}</p>
-          <p class="card-text" id="deaths">Deaths: ${item.deaths}</p>
-          <p class="card-text" id="mort">Mortality Rate: ${(
-            item.deaths / item.confirmed
-          ).toFixed(2)}%</p>
+        <div class="card-body">
+            <p class="card-text" id="population">Population: ${numberWithCommas(item.population)}</p>
+            <p class="card-text" id="confirmed">Confirmed: ${numberWithCommas(item.confirmed)}</p>
+            <p class="card-text" id="deaths">Deaths: ${numberWithCommas(item.deaths)}</p>
+            <p class="card-text" id="mort">Mortality Rate: ${(item.deaths / item.confirmed).toFixed(2)}%</p>
         </div>
       </div>`;
   });
   document.getElementById("cards").innerHTML = innerHTML;
-
-} 
-function setUp(country = "US") {
+}
+function setUp() {
   countries = defaultCountries;
   fetch(`https://covid-api.mmediagroup.fr/v1/cases`)
     .then((res) => res.json())
     .then((data) => {
       dataOfAllCountries = data;
       render();
-  });
-  getVaccApi()
+    });
+    getCurrent();
+    displayDate();
+    fetchVaccData()
 }
 
 function handleClickSearch(e) {
@@ -213,12 +220,17 @@ function handleClickSearch(e) {
   if (!country.trim()) countries = defaultCountries;
   else countries = [country.trim()];
   render();
-  getVaccApi();
+  fetchVaccData();
 }
 
-setUp();
+// https://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+//convert number 123456 to comma format 123,456
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 $('#searchForm').submit(handleClickSearch)
 
+setUp();
 
 

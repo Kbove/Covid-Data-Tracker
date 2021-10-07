@@ -4,64 +4,64 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>COVID-19 Data</title>
+    <title>COVID-19 Data Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js" integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
     <link rel="stylesheet" href="./assets/style.css" />
   </head>
+
   <body>
-    <div class="header-container">
-      <h1 class="website-name">COVID Data Tracker</h1>
-      <h3 class="total-case-container">Total Current Cases: <span id="total-case-current"></span></h3>
-      <h4 class="date-header">Current Date: <span id="current-date"></span></h4>
-    </div>
+    <header>
+      <h1><a href="https://covid.cdc.gov/covid-data-tracker/#datatracker-home" target="_blank" class="global-case">COVID Data Tracker</a></h1>
+      <h1><a href="https://covid19.who.int/" target="_blank" class="global-case">Global Total Confirmed Cases: </a><span id="total-case-current"></span></h1>
+      <h1>Current Date: <span id="current-date"></span></h1>
+    </header>
 
     <div class="search-box input-group" id="search-container">
       <form id="searchForm">
-        <span class="input-group-text" id="basic-addon1">Country</span>
-        <input
+        <span id="search-indicator">Enter the country name you would like to see: </span>
+        <div id="search-triger">
+          <input
           type="text"
-          placeholder="US"
+          placeholder="United States"
           id="country-input"
-        />
-        <button id="search-btn">Search</button>
+          />
+          <button class="btn">Search</button>
+        </div>
       </form>
     </div>
 
   
     <div class="wrapper">
-
       <div id="left-card">
-        <div class="data-show">
         <div class="data-cards" id="cards"></div>
-      </div>
       </div>
       
       <div id="right-card">
         <section id="vaccSection" class="hide">
           <div id="chart">
-            <canvas id="vaccChartCanvas" width="600" height="400"></canvas>
+            <canvas id="vaccChartCanvas"></canvas>
           </div>
             <div id="range">
               <span>Please select the number of days to look back from today: </span>
-              <input type="range" id="dateRange" min="7" max="280" value="30" />
+              <input type="range" id="dateRange" min="7" max="365" value="30" />
               <span id="rangeVal">30</span>
           </div>
         </section>
       </div>
-      
     </div>
 
 
     <section id="quiz-container">
-      <button id="quiz-btn"><a href="quiz-page/subpage.html" >Take a quiz about COVID safety!</a></button>
+      <button class="btn"><a href="quiz-page/subpage.html" id="btn-a">Take a quiz about COVID safety!</a></button>
       
     </section>
-    
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <script src="./assets/script.js"></script>
 </body>
 </html>
