@@ -1,97 +1,251 @@
-:root {
-    --purple: #90647b;
-    --red: #ea583f;
-    --yellow: #ffdb21;
-    --blue: #4787ad;
-    --white: #fef2da;
-    --black: #4f5356; 
-  }
-
-body {
+* {
   margin: 0;
   padding: 0;
 }
 
-.header-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 3px solid black;
-  color: var(--white);
-  background-color: var(--purple);
+:root {
+  --orange: #f99227;
+  --red: #fd1f4a;
+  --yellow: #ebcc72;
+  --blue: #2b85be;
+  --white: #e1dfdb;
+  --black: #2a2728; 
 }
 
-.custom-input-group {
-  padding: 10px;
+body {
+  font-family: 'Crimson Pro', serif;
+}
+
+header {
   display: flex;
   flex-direction: row;
-  margin:0 auto;
-  width: 50%;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px;
+  color: var(--black);
+  background-color: var(--white);
+  font-size: 18px;
+  overflow: hidden;
+}
+
+header h1 {
+  margin:5px;
+}
+
+.global-case {
+  text-decoration: none;
+  color: var(--black);
+}
+
+.global-case:hover {
+  background-color: rgba(42, 39, 40, 0.5);
+  color: var(--white);
+}
+
+/* modified from https://getcssscan.com/css-buttons-examples */
+.btn {
+  align-self: center;
+  background-color: var(--white);
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(42, 39, 40, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: var(--black);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .3rem .6rem .3rem .6rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  box-shadow: rgba(42, 39, 40, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.btn:focus {
+  box-shadow: rgba(42, 39, 40, .3) 2px 8px 4px -6px;
+}
+
+#btn-a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+#country-input {
+  line-height: 40px;
+  border: 2px solid rgba(42, 39, 40, .5);
+  border-radius: 4px;
+  margin: 10px;
+}
+
+#search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  color: var(--black);
+  margin: 30px 0;
+  padding:10px;
+}
+
+#searchForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#search-triger {
+  display: flex;
+  justify-content: center;
 }
 
 .wrapper {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin: 50px 0;
+  }
+
+.card-body {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-/* 
-.wrapper {
-    width: 60vw;
-  } */
-  /* .data-show {
-    background-color: #6798d0;
-    width: 100%;
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  } */
-  
-  #search.container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .search-box {
-    margin-top: 10vh;
-    width: 40%;
-  }
-  .search-box > button {
-    margin-left: 5px;
-  }
-  #cards {
-    display: flex;
-  }
-  #cards > div {
-    margin: 15px 15px 0 0;
-    display:inline-flex;
-    flex-wrap: wrap;
-    left: 30px;
-    height: 250px;
-    background-color: var(--blue);
-    color:var(--white);
-    font-weight: 600;
-  }
-  .card {
-    cursor: pointer;
-    box-shadow: 0 0 10px #4f5356;
-  }
 
 
-#vaccSection {
-  display: inline-flex;
-  flex-wrap: wrap;
+.card {
+  box-shadow: 0 0 20px #2b85be;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 30px 10px 30px;
+  color: var(--black);
+  border-radius: 8px;
+}
+
+#chart {
+  box-shadow: 0 0 20px #2b85be;
+  border-radius: 8px;
+  margin-bottom:30px;
+}
+
+.title-container {
+  display: flex;
+  justify-content: center;
+  font-size:xx-large;
+  padding-top: 10px;
+  color:var(--black);
+}
+
+.card-text {
+  padding: 10px;
+  margin: 10px;
+  color: var(--black);
+  height: 50px;
+  text-align: center;
+  font-size: larger;
+  border: 2px solid var(--white);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 8px;
+}
+
+.card-text:hover {
+  transform: scale(1.25);
+  transition: all 0.5s ease-in-out; 
+}
+
+#population {
+  background-color: var(--yellow);
+  color: var(--black);
+ 
+}
+
+#confirmed {
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+#mort {
+  background-color: var(--black);
+  color: var(--white);
+}
+
+#deaths {
+  background-color: var(--red);
+  color: var(--white)
+}
+
+canvas{
+  width:1200px !important;
+  height:600px !important;
+}
+
+#quiz-container {
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+
+#range {
+  display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  font-size: larger;
+  text-align: center;
+  margin-top: 10px;
 }
 
-#search-btn {
-    background-color: #ffdb21;
-    cursor: pointer;
+/* hide duplicate slider value */
+.thumb {
+  display:none
 }
-#country-input {
+/* fix slider value side to avoid stutter while sliding */
+#range span{
+  margin-bottom: 10px;
+}
 
+@media only screen and (max-width: 768px) {
+  .wrapper {
+   display: flex;
+   flex-direction: column;
+   align-items: space-between;
+  }
+
+  canvas{
+   width:700px !important;
+   height:440px !important;
+   margin-top: 50px;
+ }
+}
+
+@media only screen and (max-width: 600px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+  }
+
+   canvas{
+    width:500px !important;
+    height:320px !important;
+    margin-top: 30px;
+  }
 }

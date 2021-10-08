@@ -1,4 +1,4 @@
-var timerElement = document.querySelector(".timer-count");
+var timerElement = document.querySelector("#timer-count");
 const rsBtn = document.querySelector(".reset-button");
 const startBtn = document.querySelector(".start-button");
 var currentQuestion = document.querySelector("#question")
@@ -6,7 +6,7 @@ var gameScore = document.querySelector(".current-score")
 let answers = document.getElementById('answers');
 
 var questionIndex = 0
-
+let timerCount
 const questionsArray = [
     {
         question: "Covid common symptoms include...",
@@ -32,11 +32,11 @@ const questionsArray = [
         question: "Which of the following methods will NOT help to protect yourself & others from getting Covid?",
         answers: [
             {choice: "Wear a mask and stay 6-feet away from others"},
-            {choice: "Covering coughs & sneezes and wash your hands often."},
+            {choice: "Covering coughs & sneezes and wash your hands often"},
             {choice: "Going out and about on your daily routine when infected"},
             {choice: "Avoiding crowds and poorly ventilated spaces"}
         ],
-        correct: "Wear a mask and stay 6-feet away from others"
+        correct: "Going out and about on your daily routine when infected"
     },
     {
         question: "Who should get Covid tested?",
@@ -59,14 +59,14 @@ const questionsArray = [
         correct: "Take a bus to the hospital for medical care without any appointment"
     },
     {
-        question: "Who is at increased risk for severe illness?",
+        question: "Who is NOT at increased risk for severe illness?",
         answers: [
             {choice: "Teenagers"},
             {choice: "Older adults"},
             {choice: "Pregnant and recently pregnant people"},
             {choice: "People with medical conditions"}
         ],
-        correct: "Older adults"
+        correct: "Teenagers"
     },
     {
         question: "In order to protect yourself and others, you should:",
@@ -81,12 +81,12 @@ const questionsArray = [
     {
         question: "If you are not fully vaccinated, what should you do after you travel?",
         answers: [
-            {choice: "Get tested with a viral test 3-5 days after travel AND stay at home for a full 7 days after travel."},
-            {choice: "If you don’t get tested, stay home and self-quarantine for 10 days after travel."},
-            {choice: "Avoid being around people who are at increased risk for severe illness for 14 days, whether you get tested or not."},
-            {choice: "Avoid sharing personal household items and clean all 'high-touch' surfaces everyday."},
+            {choice: "Get tested with a viral test 3-5 days after travel AND stay at home for a full 7 days after travel"},
+            {choice: "If you don’t get tested, stay home and self-quarantine for 10 days after travel"},
+            {choice: "Avoid being around people who are at increased risk for severe illness for 14 days, whether you get tested or not"},
+            {choice: "All the answers above"},
         ],
-        correct: "All of the above"
+        correct: "All the answers above"
     },
 
 ]
@@ -94,8 +94,8 @@ const questionsArray = [
 function startGame() {
     startBtn.style.display = "none"
     timerCount = 75;
-    score = 0
-    console.log(questionIndex)
+    score = 0;
+    console.log(questionIndex);
     displayAnswers();
     startTimer();
 }
@@ -103,21 +103,23 @@ function startGame() {
 //starts the timer for the game
 function startTimer(){
     timer = setInterval(function(){
-        timerCount--;
         timerElement.textContent = timerCount;
-        if (timerCount < 0) {
+        if (timerCount <= 0) {
             timer.textContent === 0;
             answers.innerHTML = ""
             currentQuestion.textContent = "Game Over"
             clearInterval(timer);
             gameover();
-        }
+        }  timerCount--;
     }, 1000);
 }
 
 function displayAnswers(){
     answers.innerHTML = ""
     currentQuestion.textContent = ""
+    if (questionIndex >= questionsArray.length){
+        gameOver();
+    }
     currentQuestion.textContent = questionsArray[questionIndex].question
     var ansArr = questionsArray[questionIndex].answers;
     ansArr.forEach(element => {
@@ -136,25 +138,29 @@ function displayAnswers(){
 
 function checkAnswer(event){
     if (event.target.textContent === questionsArray[questionIndex].correct){
-    alert("great job!");
+    alert("Bingo! You got it!");
     score++
     gameScore.textContent = score
     console.log(score)
     questionIndex++
     displayAnswers();
     } else {
-    alert("WRONG")
-    timerCount -= 10
-    questionIndex++
-    displayAnswers();
+    alert("Try next time!")
+    if (timerCount <= 10) {
+        timerCount = 0;
+        gameover();
+    } else {
+        timerCount -= 10;
+        questionIndex++
+        displayAnswers();
+    }
+   
     } 
 }
 
 function gameOver(){
-    if (timerCount < 0){
-        timerElement.textContent = ""
-        clearInterval(timer);
-    }
+    timerElement.textContent = ""
+    clearInterval(timer);
     answers.innerHTML = ""
     currentQuestion.textContent = "Game Over"
 }
@@ -165,9 +171,10 @@ rsBtn.addEventListener('click', clearGame)
 function clearGame() {
     localStorage.clear()
     score = 0;
-    startBtn.style.display = "show"
+    startBtn.style.display = "inherit"
     answers.innerHTML = ""
     gameScore.innerhtml = ""
     timerElement.textContent = ""
-        clearInterval(timer);
+    clearInterval(timer);
+    questionIndex = 0;
 }
