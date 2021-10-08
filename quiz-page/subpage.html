@@ -5,24 +5,28 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Quiz</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header><button><h1 id="covid-safety"><a href="../index.html">Covid Safety</a></h1></button>
-        <div class="buttons">
-            <button class="start-button">Start</button>
-            <button class="reset-button">Quit/Reset</button>
-        </div>
+    <header><button><h1 id="covid-safety"><a href="../index.html">Covid Tracker</a></h1></button>
+
     </header>
+    <div class="buttons">
+        <button class="start-button">Start</button>
+        <button class="reset-button">Quit/Reset</button>
+    </div>
     <main>
         <section id="rule-container">
-            <div class="rules"><h2 id="rule-header">Game Rules</h2>
+            
+                <h2 id="rule-header">How much you know about Covid &#x2754;</h2>
+                <h3>Game Rules </h3>
                 <ul id="rulelist">
-                    <li>Timer starts when "Start" is pressed</li>
-                    <li>10 second penalty for wrong answers</li>
-                    <li>Each right answer is 1 pt</li>
+                    <li>&#9998; Timer starts when "Start" is pressed</li>
+                    <li>&#9998; 10 second penalty for wrong answers</li>
+                    <li>&#9998; Each right answer is 1 pt</li>
                 </ul>             
-            </div>
+            
         </section>
         
         <section>
@@ -36,21 +40,18 @@
                 </div>
             </div>
         </section>
-    <div  class="bottom">
-        <section>
-            </div>
-                <div class="card-timer">
-                    <div class="timer-text">
-                    <div class="large-font timer-count">75</div>
-                    <h3>seconds remaining</h3>
-                    </div>
+        <div class="bottom">
+            <section class="card-timer">
+                <div class="timer-text">
+                    <div id="timer-count">75</div>
+                    <div>Seconds Remaining</div>
                 </div>
-        </section>
-        <section class="score">
-            <h2>Current Score</h2>
-            <div class="current-score"></div>
-        </section>
-    </div>       
+            </section>
+            <section class="score">
+                <div>Current Score</div>
+                <div class="current-score"></div>
+            </section>
+        </div>       
     </main>
     <script src="./quiz.js"></script>
 </body>

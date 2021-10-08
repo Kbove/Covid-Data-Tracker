@@ -3,4 +3,5 @@ COVID Data Tracker is an application that allows users to input a country name a
 
 link to the deployed application: https://kbove.github.io/Bootcamp-Project-1/
 
-![Screenshot](assets/Img/screencapture-file-C-Users-Sherry-code-Bootcamp-Project-1-index-html-2021-10-07-13_29_50.png "homePage")
+![Screenshot](assets/Img/screencapture-file-C-Users-Sherry-code-Bootcamp-Project-1-index-html-2021-10-07-22_34_19.png "homePage")
+![Screenshot](assets/Img/screencapture-file-C-Users-Sherry-code-Bootcamp-Project-1-quiz-page-subpage-html-2021-10-07-22_34_29.png "quizPage")

@@ -1,4 +1,4 @@
-var timerElement = document.querySelector(".timer-count");
+var timerElement = document.querySelector("#timer-count");
 const rsBtn = document.querySelector(".reset-button");
 const startBtn = document.querySelector(".start-button");
 var currentQuestion = document.querySelector("#question")
@@ -6,7 +6,7 @@ var gameScore = document.querySelector(".current-score")
 let answers = document.getElementById('answers');
 
 var questionIndex = 0
-
+let timerCount
 const questionsArray = [
     {
         question: "Covid common symptoms include...",
@@ -94,8 +94,8 @@ const questionsArray = [
 function startGame() {
     startBtn.style.display = "none"
     timerCount = 75;
-    score = 0
-    console.log(questionIndex)
+    score = 0;
+    console.log(questionIndex);
     displayAnswers();
     startTimer();
 }
@@ -103,21 +103,23 @@ function startGame() {
 //starts the timer for the game
 function startTimer(){
     timer = setInterval(function(){
-        timerCount--;
         timerElement.textContent = timerCount;
-        if (timerCount < 0) {
+        if (timerCount <= 0) {
             timer.textContent === 0;
             answers.innerHTML = ""
             currentQuestion.textContent = "Game Over"
             clearInterval(timer);
             gameover();
-        }
+        }  timerCount--;
     }, 1000);
 }
 
 function displayAnswers(){
     answers.innerHTML = ""
     currentQuestion.textContent = ""
+    if (questionIndex >= questionsArray.length){
+        gameOver();
+    }
     currentQuestion.textContent = questionsArray[questionIndex].question
     var ansArr = questionsArray[questionIndex].answers;
     ansArr.forEach(element => {
@@ -136,25 +138,29 @@ function displayAnswers(){
 
 function checkAnswer(event){
     if (event.target.textContent === questionsArray[questionIndex].correct){
-    alert("great job!");
+    alert("Bingo! You got it!");
     score++
     gameScore.textContent = score
     console.log(score)
     questionIndex++
     displayAnswers();
     } else {
-    alert("WRONG")
-    timerCount -= 10
-    questionIndex++
-    displayAnswers();
+    alert("Try next time!")
+    if (timerCount <= 10) {
+        timerCount = 0;
+        gameover();
+    } else {
+        timerCount -= 10;
+        questionIndex++
+        displayAnswers();
+    }
+   
     } 
 }
 
 function gameOver(){
-    if (timerCount < 0){
-        timerElement.textContent = ""
-        clearInterval(timer);
-    }
+    timerElement.textContent = ""
+    clearInterval(timer);
     answers.innerHTML = ""
     currentQuestion.textContent = "Game Over"
 }
@@ -170,4 +176,5 @@ function clearGame() {
     gameScore.innerhtml = ""
     timerElement.textContent = ""
     clearInterval(timer);
+    questionIndex = 0;
 }
